@@ -41,7 +41,7 @@ namespace HtmlParserMajestic
     /// 
     /// </summary>
     ///<exclude/>
-    public class FastHash : IDisposable
+    internal class FastHash : IDisposable
     {
         #region Constants and Fields
 

@@ -7,7 +7,7 @@ namespace HtmlParserMajestic
     /// <summary>
     /// Implements parsing of entities
     /// </summary>
-    public class HtmlEntities
+    internal class HtmlEntities
     {
         /// <summary>
         /// Supported HTML entities

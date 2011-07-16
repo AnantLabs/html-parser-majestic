@@ -11,7 +11,7 @@ namespace HtmlParserMajestic
     /// This is effectively a fancy hash lookup table with attributes being hashed in context of tag
     /// </summary>
     ///<exclude/>
-    public class HtmlHeuristics : IDisposable
+    internal class HtmlHeuristics : IDisposable
     {
         #region Constants and Fields
 

@@ -2,7 +2,7 @@
 
 Copyright (c) Alex Chudnovsky, Majestic-12 Ltd (UK). 2005+ All rights reserved
 Web:		http://www.majestic12.co.uk
-E-mail:		alexc@majestic12.co.uk
+E-mail:		alexc@majestic12.co.uk 
 
 Redistribution and use in source and binary forms, with or without modification, are 
 permitted provided that the following conditions are met:
@@ -143,7 +143,7 @@ namespace HtmlParserMajestic
     /// Do NOT create multiple instances of this class - REUSE single instance
     /// Do NOT call same instance from multiple threads - it is NOT thread safe
     /// </summary>
-    public class HtmlParser : IDisposable
+    internal class HtmlParser : IDisposable
     {
         #region Constants and Fields
 
@@ -245,7 +245,7 @@ namespace HtmlParserMajestic
         /// <summary>
         /// This chunk will be returned when it was parsed
         /// </summary>
-        private HtmlChunk oChunk = new HtmlChunk(true);
+        private HtmlChunk oChunk = new HtmlChunk();
 
         /// <summary>
         /// Entities manager
@@ -484,13 +484,6 @@ namespace HtmlParserMajestic
             if (oChunk.sTag.Length != 4 || oChunk.sTag[0] != 'm' || oChunk.sTag != "meta")
             {
                 return false;
-            }
-
-            // if we do not use hashmode already then we call conversion explicitly
-            // this is slow, but METAs are very rare so performance penalty is low
-            if (!oChunk.bHashMode)
-            {
-                oChunk.ConvertParamsToHash();
             }
 
             var sKey = oChunk.oParams["http-equiv"] as string;
@@ -1108,15 +1101,6 @@ namespace HtmlParserMajestic
         public void Reset()
         {
             this.iCurPos = 0;
-        }
-
-        /// <summary>
-        /// Sets chunk param hash mode
-        /// </summary>
-        /// <param name="bHashMode">If true then tag's params will be kept in Chunk's hashtable (slower), otherwise kept in arrays (sParams/sValues)</param>
-        public void SetChunkHashMode(bool bHashMode)
-        {
-            this.oChunk.bHashMode = bHashMode;
         }
 
         /// <summary>

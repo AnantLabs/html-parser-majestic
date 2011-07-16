@@ -60,11 +60,16 @@
     <Compile Include="DynaString.cs" />
     <Compile Include="FastHash.cs" />
     <Compile Include="HtmlChunk.cs" />
+    <Compile Include="HtmlChunkType.cs" />
     <Compile Include="HtmlEntities.cs" />
     <Compile Include="HtmlHeuristics.cs" />
     <Compile Include="HtmlParser.cs" />
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="TagParser.cs" />
+    <Compile Include="Wrappers\HtmlChunk.cs" />
+    <Compile Include="Wrappers\HtmlParser.cs" />
+    <Compile Include="Wrappers\HtmlChunkType.cs" />
+    <Compile Include="Wrappers\HtmlTagType.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Helpers\" />
@@ -86,6 +91,12 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Utilities\Utilities.csproj">
+      <Project>{4E4A7BD0-821F-44E2-8842-BC49CDDA0D73}</Project>
+      <Name>Utilities</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
