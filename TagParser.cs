@@ -109,7 +109,7 @@ namespace HtmlParserMajestic
             LowerCasedASCIIorDigit = 2,
 
             /// <summary>
-            /// semicolon - used for namespaces, ie: <namespace:a>
+            /// semicolon - used for namespaces, ie: &lt;namespace:a&gt;
             /// </summary>
             NameSpaceColon = 3,
 
@@ -1074,9 +1074,9 @@ namespace HtmlParserMajestic
 
             AttributeValueParsing:
 
-            /// ***********************************************************************
-            /// STAGE 3: parse attribute value
-            /// ***********************************************************************
+            // ***********************************************************************
+            // STAGE 3: parse attribute value
+            // ***********************************************************************
 
             // the value could be just string, or in quotes (single or double)
             // or we can have next attribute name start, in which case we will jump back to attribute parsing

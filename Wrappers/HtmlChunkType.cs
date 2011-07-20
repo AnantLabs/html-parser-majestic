@@ -5,6 +5,7 @@ namespace HtmlParserMajestic.Wrappers
     /// </summary>
     public enum HtmlChunkType
     {
+        None,
         /// <summary>
         /// Text data from HTML
         /// </summary>

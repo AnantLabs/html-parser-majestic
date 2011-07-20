@@ -147,7 +147,7 @@ namespace HtmlParserMajestic
 
                         if (cChar == cQuoteChar)
                         {
-                            oSB.Append("&#" + ((int)cChar).ToString() + ";");
+                            oSB.Append("&#" + (int)cChar + ";");
                         }
                         else
                         {
@@ -170,7 +170,7 @@ namespace HtmlParserMajestic
         public void AddParam(string sParam, string sValue, byte cParamChar)
         {
             this.iParams++;
-            this.oParams.Add(sParam, sValue);
+            if (!this.oParams.ContainsKey(sParam)) this.oParams.Add(sParam, sValue);
         }
 
         /// <summary>
@@ -297,8 +297,7 @@ namespace HtmlParserMajestic
 
                     return this.oHTML;
             }
-            ;
-
+            
             return sHTML;
         }
 
@@ -353,7 +352,7 @@ namespace HtmlParserMajestic
             {
                 foreach (string sParam in this.oParams.Keys)
                 {
-                    var sValue = (string)this.oParams[sParam];
+                    var sValue = this.oParams[sParam];
 
                     if (sParamHTML.Length > 0)
                     {

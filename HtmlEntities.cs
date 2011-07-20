@@ -67,11 +67,7 @@ namespace HtmlParserMajestic
         /// after entity
         /// </summary>
         /// <returns>Char (not byte) that corresponds to the entity or 0 if it was not entity</returns>
-#if UNSAFE_CODE
-		internal unsafe char CheckForEntity(byte[] bHTML,ref int iCurPos)
-#else
         internal char CheckForEntity(byte[] bHTML, ref int iCurPos, int iDataLength)
-#endif
         {
             if (!this.bDecodeEntities && !this.bMiniEntities)
             {
@@ -199,19 +195,19 @@ namespace HtmlParserMajestic
                                 if (!bCharCodeHex)
                                 {
 #if DOTNET20
-    // we want to avoid exceptions if possible as they are slow
-									if(!int.TryParse(sEntity,out iChar))
-									{
-										if(iChars>0)
-										{
-											if((iCurPos-iChars)>=0)
-												iCurPos-=iChars;
+                                    // we want to avoid exceptions if possible as they are slow
+                                    if (!int.TryParse(sEntity, out iChar))
+                                    {
+                                        if (iChars > 0)
+                                        {
+                                            if ((iCurPos - iChars) >= 0)
+                                                iCurPos -= iChars;
 
-											//PutChars(iChars);
-										}
+                                            //PutChars(iChars);
+                                        }
 
-										return (char)(0);
-									}
+                                        return (char)(0);
+                                    }
 #else
                                     iChar = int.Parse(sEntity);
 #endif
@@ -219,18 +215,18 @@ namespace HtmlParserMajestic
                                 else
                                 {
 #if DOTNET20
-    // we want to avoid exceptions if possible as they are very slow
-									if(!int.TryParse(sEntity,System.Globalization.NumberStyles.HexNumber,null,out iChar))
-									{
-										if(iChars>0)
-										{
-											if((iCurPos-iChars)>=0)
-												iCurPos-=iChars;
+                                    // we want to avoid exceptions if possible as they are very slow
+                                    if (!int.TryParse(sEntity, System.Globalization.NumberStyles.HexNumber, null, out iChar))
+                                    {
+                                        if (iChars > 0)
+                                        {
+                                            if ((iCurPos - iChars) >= 0)
+                                                iCurPos -= iChars;
 
-											//PutChars(iChars);
-										}
-										return (char)(0);
-									}
+                                            //PutChars(iChars);
+                                        }
+                                        return (char)(0);
+                                    }
 #else
 
                                     iChar = int.Parse(sEntity, NumberStyles.HexNumber);
@@ -291,11 +287,7 @@ namespace HtmlParserMajestic
         /// This function will decode any entities found in a string - not fast!
         /// </summary>
         /// <returns>Possibly decoded string</returns>
-#if UNSAFE_CODE
-		internal static unsafe char DecodeEntities()
-#else
         internal static string DecodeEntities(string sData)
-#endif
         {
             char cChar;
 
@@ -906,7 +898,7 @@ namespace HtmlParserMajestic
                     case 146:
                     case 147:
                     case 148:
-                        oSB.Append("&#" + ((int)cChar).ToString() + ";");
+                        oSB.Append("&#" + (int)cChar + ";");
                         continue;
 
                     default:
@@ -920,7 +912,6 @@ namespace HtmlParserMajestic
 
                         break;
                 }
-                ;
 
                 if (cChar < sEntityReverseLookup.Length)
                 {
@@ -940,7 +931,7 @@ namespace HtmlParserMajestic
                                 case '&':
                                     break;
 
-                                    // ignore most of chars then - they should be encoded using encoding then, not entities
+                                // ignore most of chars then - they should be encoded using encoding then, not entities
                                 default:
 
                                     if (cChar < 127)
@@ -951,7 +942,6 @@ namespace HtmlParserMajestic
                                     oSB.Append(cChar);
                                     continue;
                             }
-                            ;
                         }
 
                         // 14/05/08 we use numeric entities above ASCII level
@@ -964,7 +954,7 @@ namespace HtmlParserMajestic
                         }
                         else
                         {
-                            oSB.Append("&#" + ((int)cChar).ToString() + ";");
+                            oSB.Append("&#" + (int)cChar + ";");
                         }
                         /*
 						oSB.Append("&");

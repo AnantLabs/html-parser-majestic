@@ -90,7 +90,7 @@ namespace HtmlParserMajestic
                 var bChar1 = (byte)(i >> 8);
                 var bChar2 = (byte)(i & 0xFF);
 
-                sAllTwoCharStrings[bChar1, bChar2] = ((((char)bChar1).ToString() + ((char)bChar2).ToString())).ToLower();
+                sAllTwoCharStrings[bChar1, bChar2] = ((char)bChar1 + ((char)bChar2).ToString()).ToLower();
             }
         }
 
@@ -102,7 +102,7 @@ namespace HtmlParserMajestic
         /// Adds tag to list of tracked tags (don't add too many, if you have got multiple same first
         /// 2 chars then duplicates won't be added, so make sure the first added tags are the MOST LIKELY to be found)
         /// </summary>
-        /// <param name="sTag">Tag: strictly ASCII only</param>
+        /// <param name="p_sTag">Tag: strictly ASCII only</param>
         /// <param name="sAttributeNames">Comma delimited list of attributed</param>
         /// <param name="bAddClosed">If true then closed version of tag added</param>
         /// <returns>True if tag was added, false otherwise (it may already be added, or leads to hash clash)</returns>

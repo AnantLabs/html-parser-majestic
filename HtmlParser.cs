@@ -122,16 +122,7 @@ USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 /// 
 /// 
 /// </summary>
-
-
-#if CONAN_NAMESPACE
-using MJ12ConAn;
-
-namespace MJ12ConAn
-#else
-
 namespace HtmlParserMajestic
-#endif
 {
     using System;
     using System.IO;
@@ -234,7 +225,6 @@ namespace HtmlParserMajestic
         /// <summary>
         /// Current position pointing to byte in bHTML
         /// </summary>
-        /// <exclude/
         private int iCurPos;
 
         /// <summary>
@@ -486,17 +476,18 @@ namespace HtmlParserMajestic
                 return false;
             }
 
-            var sKey = oChunk.oParams["http-equiv"] as string;
 
-            if (sKey != null)
+            if (oChunk.oParams.ContainsKey("http-equiv"))
             {
+            var sKey = oChunk.oParams["http-equiv"];
+
                 // FIXIT: even though this is happening rare I really don't like lower casing stuff
                 // that most likely would not need to be - if you feel bored then rewrite this bit
                 // to make it faster, it is really easy...
                 switch (sKey.ToLower())
                 {
                     case "content-type":
-                        // rare case (appears to work in IE) reported to exist in some pages by Martin Bächtold
+                    // rare case (appears to work in IE) reported to exist in some pages by Martin Bächtold
                     case "content-category":
 
                         // we might have charset here that may hint at necessity to decode page
@@ -506,11 +497,12 @@ namespace HtmlParserMajestic
                         // sure there are web pages out there that do that!!!
                         if (!bEncodingSet)
                         {
-                            var sData = oChunk.oParams["content"] as string;
 
                             // it is possible we have broken META tag without Content part
-                            if (sData != null)
+                            if (oChunk.oParams.ContainsKey("content"))
                             {
+                            var sData = oChunk.oParams["content"];
+
                                 if (oP.SetEncoding(sData))
                                 {
                                     // we may need to re-encode title
@@ -536,7 +528,6 @@ namespace HtmlParserMajestic
                     default:
                         break;
                 }
-                ;
             }
 
             return false;
@@ -643,7 +634,6 @@ namespace HtmlParserMajestic
 
                         break;
                 }
-                ;
             }
 
             if (sDigits.Length == 0 || iDigits == 0)
@@ -741,8 +731,7 @@ namespace HtmlParserMajestic
 
                             break;
                     }
-                    ;
-
+                    
                     if (cChar < HtmlEntities.sEntityReverseLookup.Length
                         && HtmlEntities.sEntityReverseLookup[cChar] != null)
                     {
@@ -1252,7 +1241,7 @@ namespace HtmlParserMajestic
         }
 
         /// <summary>
-        /// Internally parses tag and returns it from point when '<' was found
+        /// Internally parses tag and returns it from point when '&lt;' was found
         /// </summary>
         /// <returns>Chunk</returns>
         private HtmlChunk GetNextTag()

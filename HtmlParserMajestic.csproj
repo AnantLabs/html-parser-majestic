@@ -72,7 +72,6 @@
     <Compile Include="Wrappers\HtmlTagType.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Helpers\" />
     <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
