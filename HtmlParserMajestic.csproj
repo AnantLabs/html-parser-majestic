@@ -92,8 +92,8 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Utilities\Utilities.csproj">
-      <Project>{4E4A7BD0-821F-44E2-8842-BC49CDDA0D73}</Project>
+    <ProjectReference Include="..\Utilities\Utilities\Utilities.csproj">
+      <Project>{240E5097-8D5C-4532-9BE2-D4D0F123FB52}</Project>
       <Name>Utilities</Name>
     </ProjectReference>
   </ItemGroup>
