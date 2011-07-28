@@ -70,6 +70,7 @@
     <Compile Include="Wrappers\HtmlParser.cs" />
     <Compile Include="Wrappers\HtmlChunkType.cs" />
     <Compile Include="Wrappers\HtmlTagType.cs" />
+    <Compile Include="Wrappers\HtmlUtils.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
